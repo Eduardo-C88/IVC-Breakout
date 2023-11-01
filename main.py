@@ -279,8 +279,8 @@ while not exit_program:
     # Update center of the contour
     direction = camera.start_camloop()
 
-    """ Tracking
-    center_countour_x = camera.start_camloop() """
+    """ Tracking"""
+    #center_countour_x = camera.start_camloop()
 
     # Clear the screen
     screen.fill(black)

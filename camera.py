@@ -1,8 +1,6 @@
 import cv2
 import segment
 
-camera_index = 1
-
 cap = cv2.VideoCapture()
 
 def get_cap():

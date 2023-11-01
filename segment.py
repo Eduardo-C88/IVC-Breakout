@@ -28,16 +28,6 @@ def update_segmentation(image_hsv):
                 maxval=1, type=cv2.THRESH_BINARY_INV)
     mask_v = mask_vmin * mask_vmax
 
-    #cv2.imshow("Mask Hmin",mask_hmin * 255)
-    #cv2.imshow("Mask Hmax",mask_hmax * 255)
-    #cv2.imshow("Mask H",mask_h * 255)
-    #cv2.imshow("Mask Smin",mask_smin * 255)
-    #cv2.imshow("Mask Smax",mask_smax * 255)
-    #cv2.imshow("Mask S",mask_s * 255)
-    #cv2.imshow("Mask Vmin",mask_vmin * 255)
-    #cv2.imshow("Mask Vmax",mask_vmax * 255)
-    #cv2.imshow("Mask V",mask_v * 255)
-
     mask = mask_h * mask_s * mask_v
 
     kernel = np.ones((5, 5), np.uint8)
