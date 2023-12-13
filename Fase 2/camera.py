@@ -1,5 +1,5 @@
 import cv2
-import tracker
+import object
 
 cap = cv2.VideoCapture()
 
@@ -22,9 +22,9 @@ def start_camloop():
             image = image[:, ::-1, :]
             cv2.imshow("Image", image)
             #window_size = cv2.getWindowImageRect("Image")
-            center = tracker.find_object(image)
+            center = object.find_object_position(image)
 
-            direction = tracker.find_object_direction(center, image.shape[1])
+            direction = object.find_object_direction(center, image.shape[1])
 
             if direction is not None:
                 # Use the 'direction' variable in your code

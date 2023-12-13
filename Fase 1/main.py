@@ -12,6 +12,7 @@
 import cv2
 import math
 import pygame
+import segment
 import camera
 
 # Define some colors
@@ -159,7 +160,7 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed
 
-        """ Update the player position based on the direction returned """
+        """ Update the player position based on the direction returned by find_countour_direction. """
         if direction is not None:
             if direction == -1:
                 # Move the paddle left
@@ -199,6 +200,7 @@ class Player(pygame.sprite.Sprite):
 
 # Call this function so the Pygame library can initialize itself
 pygame.init()
+segment.create_trackbar()
 
 # Create an 800x600 sized screen
 screen = pygame.display.set_mode([800, 600])
@@ -274,7 +276,7 @@ while not exit_program:
     # Limit to 60 fps
     clock.tick(60)
 
-    # Update center of the object
+    # Update center of the contour
     direction = camera.start_camloop()
 
     """ Tracking"""

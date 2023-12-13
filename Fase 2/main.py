@@ -12,6 +12,7 @@
 import cv2
 import math
 import pygame
+import object
 import camera
 
 # Define some colors
@@ -159,7 +160,7 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed
 
-        """ Update the player position based on the direction returned """
+        """ Update the player position based on the direction returned by find_countour_direction. """
         if direction is not None:
             if direction == -1:
                 # Move the paddle left
