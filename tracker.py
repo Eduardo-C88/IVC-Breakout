@@ -7,7 +7,7 @@ import numpy as np
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 tracker = cv2.TrackerCSRT_create()
 
-x, y, w, h = 200, 100, 200, 240
+x, y, w, h = 300, 240, 100, 100
 bbox = (x, y, w, h)
 
 _, frame = cap.read()
