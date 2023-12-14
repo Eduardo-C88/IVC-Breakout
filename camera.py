@@ -1,7 +1,7 @@
 import cv2
 import tracker
 
-cap = cv2.VideoCapture()
+cap = cv2.VideoCapture(0)
 
 def get_cap():
     return cap

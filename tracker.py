@@ -4,7 +4,7 @@ import os
 import time
 import numpy as np
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 tracker = cv2.TrackerCSRT_create()
 
 x, y, w, h = 200, 100, 200, 240
@@ -15,7 +15,6 @@ _, frame = cap.read()
 img = cv2.rectangle(img=frame, pt1=(x, y), pt2=(x+w, y+h), color=255, thickness=2)
 
 cv2.imshow("Image", img)
-cv2.waitKey()
 tracker.init(frame, bbox)
 
 def find_object(image):
