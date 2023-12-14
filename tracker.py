@@ -5,10 +5,6 @@ import time
 import numpy as np
 
 cap = cv2.VideoCapture(0)
-
-def get_cap():
-    return cap
-
 tracker = cv2.TrackerCSRT_create()
 
 x, y, w, h = 200, 100, 200, 240
@@ -27,11 +23,10 @@ def find_object(image):
     center_x = (image.shape[1] / 2)
 
     if ret:
-
         track_ok, bbox = tracker.update(frame)
         if track_ok:
             x, y, w, h = bbox
-            center_x = (int(x) + int(x + w)) / 2
+            center_x = int((x + x + w) / 2)
             image_show = cv2.rectangle(img=frame, pt1=(x, y), pt2=(x + w, y + h), color=255, thickness=2)
         else:
             image_show = frame.copy()
@@ -45,6 +40,7 @@ def find_object(image):
         cv2.imshow(winname="Image", mat=image_show)
 
     return center_x
+
 def find_object_direction(center, image_width):
     # Calculate the position relative to the image width
     position = center / image_width
