@@ -1,8 +1,8 @@
-from tracker import *
+import cv2
+import tracker
 
 cap = cv2.VideoCapture(0)
 cap.open(0)
-tracker = Tracker()
 isInit = False
 direction = None
 
@@ -21,10 +21,10 @@ def start_camloop():
         img2 = image[:, ::-1, :].copy()
 
         if isInit:
-            direction = tracker.track(img2)
+            direction = tracker.find_object(img2)
         else:
             isInit = True
-            tracker.init_track(img2, (280, 100, 100, 100))
+            tracker.init_track(img2, (300, 180, 100, 100))
 
         if direction is not None:
             # Use the 'direction' variable in your code
