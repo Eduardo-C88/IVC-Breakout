@@ -1,53 +1,42 @@
 import cv2
-# pip install opencv-contrib-python
-import os
-import time
-import numpy as np
 
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-tracker = cv2.TrackerCSRT_create()
 
-x, y, w, h = 300, 240, 100, 100
-bbox = (x, y, w, h)
+class Tracker:
 
-_, frame = cap.read()
+    def __init__(self):
+        self.tracker = cv2.TrackerCSRT_create()
 
-img = cv2.rectangle(img=frame, pt1=(x, y), pt2=(x+w, y+h), color=255, thickness=2)
+    def init_track(self, frame, bbox):
+        if bbox is not None:
+            self.tracker.init(frame, bbox)
 
-cv2.imshow("Image", img)
-tracker.init(frame, bbox)
+    def track(self, frame):
 
-def find_object(image):
-    ret, frame = cap.read()
-    center_x = (image.shape[1] / 2)
-
-    if ret:
-        track_ok, bbox = tracker.update(frame)
+        track_ok, (x, y, w, h) = self.tracker.update(frame)
         if track_ok:
-            x, y, w, h = bbox
-            center_x = int((x + x + w) / 2)
-            image_show = cv2.rectangle(img=frame, pt1=(x, y), pt2=(x + w, y + h), color=255, thickness=2)
+            cv2.rectangle(img=frame, pt1=(x, y), pt2=(x + w, y + h), color=(0, 255, 0), thickness=2)
+
+            x = (x + (x + w)) / 2
+            position_x = x * 100 / frame.shape[1]
+
+            return self.find_object_direction(position_x)
         else:
-            image_show = frame.copy()
-            cv2.putText(img=image_show,
+            cv2.putText(img=frame,
                         text="Tracking failed",
                         org=(5, 35),
                         fontFace=cv2.FONT_HERSHEY_SIMPLEX,
                         fontScale=0.5,
                         color=(0, 0, 255),
                         thickness=2)
-        cv2.imshow(winname="Image", mat=image_show)
+            return -1, 0
 
-    return center_x
+    def find_object_direction(self, center):
+        # Calculate the position relative to the image width
 
-def find_object_direction(center, image_width):
-    # Calculate the position relative to the image width
-    position = center / image_width
-
-    # Determine the direction based on position
-    if position < 1 / 3:
-        return -1  # Contour is closer to 1/3
-    elif position > 2 / 3:
-        return 1  # Contour is closer to 2/3
-    else:
-        return None
+        # Determine the direction based on position
+        if center < 30:
+            return -1  # Contour is closer to 1/3
+        elif center > 70:
+            return 1  # Contour is closer to 2/3
+        else:
+            return None
