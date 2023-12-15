@@ -1,4 +1,3 @@
-import cv2
 from tracker import *
 
 cap = cv2.VideoCapture(0)

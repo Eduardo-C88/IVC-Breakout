@@ -12,7 +12,7 @@
 import cv2
 import math
 import pygame
-import camera
+import camera2
 
 # Define some colors
 black = (0, 0, 0)
@@ -275,7 +275,7 @@ while not exit_program:
     clock.tick(60)
 
     # Update center of the object
-    direction = camera.start_camloop()
+    direction = camera2.start_camloop()
 
     """ Tracking"""
     #center_countour_x = camera.start_camloop()
@@ -335,5 +335,5 @@ while not exit_program:
         pygame.display.flip()
 
 cv2.destroyAllWindows()
-camera.get_cap().release()
+camera2.get_cap().release()
 pygame.quit()
