@@ -24,7 +24,7 @@ def start_camloop():
             direction = tracker2.find_object(img2)
         else:
             isInit = True
-            tracker2.init_track(img2, (280, 100, 100, 100))
+            tracker2.init_track(img2, (300, 180, 100, 100))
 
         if direction is not None:
             # Use the 'direction' variable in your code
